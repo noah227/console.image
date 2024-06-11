@@ -17,7 +17,7 @@ module.exports = [
 			file: "./dist/index.js",
 			format: "es",
 			exports: "auto",
-			sourcemap: true
+			sourcemap: false
 		},
 		plugins: [
 			...plugins
