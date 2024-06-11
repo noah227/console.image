@@ -16,4 +16,4 @@ console.image("http://127.0.0.1/x.png", {width: 198})
 
 ## example
 
-See [example](./index.html)
+See [example](https://noah227.github.io/console.image/)
