@@ -45,9 +45,9 @@ type TBackgroundSize =
 type TOption = {
 	width?: number
 	height?: number
-	repeat: BackgroundRepeat
-	position: TBackgroundPositionItem[]
-	size: TBackgroundSize
+	repeat?: BackgroundRepeat
+	position?: TBackgroundPositionItem[]
+	size?: TBackgroundSize
 	[index: string]: any
 }
 
@@ -56,7 +56,7 @@ const defaultOptions: Partial<TOption> = {
 	size: "contain"
 }
 
-const prepareStyles = (url: string, options: TOption): Promise<string[]> => new Promise((resolve, reject) => {
+const prepareStyles = (url: string, options?: TOption): Promise<string[]> => new Promise((resolve) => {
 	const {repeat, position, size, ...res} = {...defaultOptions, ...options}
 	const styles: string[] = [
 		`background-repeat: ${repeat}`,
@@ -70,7 +70,7 @@ const prepareStyles = (url: string, options: TOption): Promise<string[]> => new 
 	resolve(styles)
 })
 
-console = {
+export default {
 	...console,
 	/**
 	 * Attention!: limited by CORS policy!
@@ -126,6 +126,7 @@ console = {
 			}
 		})
 	}
+
 } as Console & {
-	image: (url: string, options: TOption) => void
+	image: (url: string, options?: TOption) => void
 }
