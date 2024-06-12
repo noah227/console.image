@@ -1,3 +1,5 @@
+import {kebabCase} from "change-case"
+
 type TBackgroundRepeat = "no-repeat" | "repeat" | "repeat-x" | "repeat-y" | "round" | "space"
 
 type TBackgroundPositionItem =
@@ -47,7 +49,7 @@ const prepareStyles = (url: string, options?: TOption): Promise<string[]> => new
 	position?.length && styles.push(`background-position: ${position.join(" ")}`)
 	size && styles.push(`background-size: ${size}`)
 	Object.entries(res).forEach(([k, v]) => {
-		styles.push([k, v].join(": "))
+		styles.push([kebabCase(k), v].join(": "))
 	})
 	resolve(styles)
 })
