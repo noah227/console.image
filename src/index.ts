@@ -1,24 +1,5 @@
-export enum BackgroundRepeat {
-	noRepeat = "no-repeat",
-	repeat = "repeat",
-	repeatX = "repeat-x",
-	repeatY = "repeat-y",
-	round = "round",
-	space = "space"
-}
+type TBackgroundRepeat = "no-repeat" | "repeat" | "repeat-x" | "repeat-y" | "round" | "space"
 
-// export enum BackgroundPosition {
-// 	bottom = "bottom",
-// 	center = "center",
-// 	left = "left",
-// 	right = "right",
-// 	top="top",
-// 	inherit="inherit",
-// 	initial="initial",
-// 	revert = "revert",
-// 	revertLayer = "revert-layer",
-// 	unset = "unset",
-// }
 type TBackgroundPositionItem =
 	"bottom"
 	| "center"
@@ -31,6 +12,7 @@ type TBackgroundPositionItem =
 	| "revert-layer"
 	| "unset"
 	| any
+
 type TBackgroundSize =
 	"auto"
 	| "contain"
@@ -45,14 +27,14 @@ type TBackgroundSize =
 type TOption = {
 	width?: number
 	height?: number
-	repeat?: BackgroundRepeat
+	repeat?: TBackgroundRepeat
 	position?: TBackgroundPositionItem[]
 	size?: TBackgroundSize
 	[index: string]: any
 }
 
 const defaultOptions: Partial<TOption> = {
-	repeat: BackgroundRepeat.noRepeat,
+	repeat: "no-repeat",
 	size: "contain"
 }
 

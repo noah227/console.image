@@ -1,14 +1,5 @@
-var BackgroundRepeat;
-(function (BackgroundRepeat) {
-    BackgroundRepeat["noRepeat"] = "no-repeat";
-    BackgroundRepeat["repeat"] = "repeat";
-    BackgroundRepeat["repeatX"] = "repeat-x";
-    BackgroundRepeat["repeatY"] = "repeat-y";
-    BackgroundRepeat["round"] = "round";
-    BackgroundRepeat["space"] = "space";
-})(BackgroundRepeat || (BackgroundRepeat = {}));
 const defaultOptions = {
-    repeat: BackgroundRepeat.noRepeat,
+    repeat: "no-repeat",
     size: "contain"
 };
 const prepareStyles = (url, options) => new Promise((resolve) => {
@@ -81,4 +72,4 @@ var index = {
     }
 };
 
-export { BackgroundRepeat, index as default };
+export { index as default };
