@@ -79,12 +79,12 @@ export default {
 						// 指定了尺寸，那么要根据这个尺寸进行实际尺寸的约束
 						if (width || height) {
 							// 仅指定宽度
-							if (width && !height) {
+							if (!height) {
 								// 比例计算
 								height = width * (ih / iw)
 							}
 							// 仅指定高度
-							else if (height && !width) {
+							else if (!width) {
 								width = height * (iw / ih)
 							}
 							// 宽高同时指定
