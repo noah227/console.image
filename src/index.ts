@@ -99,7 +99,7 @@ export default {
 							`background-image: url(${fr.result})`,
 							`padding: ${height as number / 2}px ${width as number / 2}px`,
 						])
-						console.log(styles)
+						// console.log(styles)
 						console.log("%c ", styles.join(";"));
 					}
 					img.onerror = e => console.error(e)
