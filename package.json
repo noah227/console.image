@@ -12,6 +12,13 @@
 	],
 	"author": "",
 	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/noah227/console.image.git"
+	},
+	"bugs": {
+		"url": "https://github.com/noah227/console.image/issues"
+	},
 	"description": "Log image in browser's console",
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^24.1.0",
