@@ -22,5 +22,8 @@
 		"rollup": "^3.23.0",
 		"tslib": "^2.6.3",
 		"typescript": "^5.4.5"
+	},
+	"dependencies": {
+		"change-case": "^5.4.4"
 	}
 }

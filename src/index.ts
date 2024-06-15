@@ -1,3 +1,5 @@
+import {kebabCase} from "change-case"
+
 type TBackgroundRepeat = "no-repeat" | "repeat" | "repeat-x" | "repeat-y" | "round" | "space"
 
 type TBackgroundPositionItem =
@@ -47,7 +49,7 @@ const prepareStyles = (url: string, options?: TOption): Promise<string[]> => new
 	position?.length && styles.push(`background-position: ${position.join(" ")}`)
 	size && styles.push(`background-size: ${size}`)
 	Object.entries(res).forEach(([k, v]) => {
-		styles.push([k, v].join(": "))
+		styles.push([kebabCase(k), v].join(": "))
 	})
 	resolve(styles)
 })
@@ -77,12 +79,12 @@ export default {
 						// 指定了尺寸，那么要根据这个尺寸进行实际尺寸的约束
 						if (width || height) {
 							// 仅指定宽度
-							if (width && !height) {
+							if (!height) {
 								// 比例计算
 								height = width * (ih / iw)
 							}
 							// 仅指定高度
-							else if (height && !width) {
+							else if (!width) {
 								width = height * (iw / ih)
 							}
 							// 宽高同时指定
