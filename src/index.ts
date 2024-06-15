@@ -81,11 +81,11 @@ export default {
 							// 仅指定宽度
 							if (!height) {
 								// 比例计算
-								height = width * (ih / iw)
+								height = (width as number) * (ih / iw)
 							}
 							// 仅指定高度
 							else if (!width) {
-								width = height * (iw / ih)
+								width = (height as number) * (iw / ih)
 							}
 							// 宽高同时指定
 							else {
