@@ -10,6 +10,6 @@ type TOption = {
     [index: string]: any;
 };
 declare const _default: Console & {
-    image: (url: string, options?: TOption) => void;
+    image: (url: string, options?: TOption, callback?: Function) => Promise<void>;
 };
 export default _default;

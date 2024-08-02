@@ -8,7 +8,9 @@
 Press F12 to open Devtools
 <script type="module">
 	import console from "../dist/index.js"
-	console.image("./chieru~.128.png")
+	console.image("./chieru~.128.png").then(() => {
+		console.log("churu~")
+	})
 </script>
 </body>
 </html>
