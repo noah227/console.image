@@ -2,6 +2,13 @@
 
 ## usage
 
+### type definition
+```ts
+// support both callback and Promise
+image: (url: string, options?: TOption, callback?: Function) => Promise<void>
+```
+
+### code example
 ```ts
 import console from "@cynario/console.image"
 
@@ -18,6 +25,11 @@ console.image(require("@/assets/x.png"))
 
 // of course, you can still use raw functions of console
 console.log("hello")
+
+// extra example (Promise)
+console.image("http://127.0.0.1/x.png").then(() => {
+    console.log("Hi there! Now you can see the image!")
+})
 ```
 
 ## example
