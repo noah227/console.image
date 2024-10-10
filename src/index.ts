@@ -65,56 +65,57 @@ export default {
 	image(url, options, callback?: Function) {
 		return new Promise((resolve, reject) => {
 			prepareStyles(url, options).then(styles => {
-				const x = new XMLHttpRequest()
-				x.responseType = "blob"
-				x.open("get", url)
-				x.send()
-				x.onload = () => {
-					const fr = new FileReader()
-					fr.onload = () => {
-						let {width, height} = {...defaultOptions, ...options}
-						const img = new Image()
-						img.src = fr.result as string
-						img.onload = () => {
-							const iw = img.width, ih = img.height
-							if (!iw || !ih) throw new Error(`Invalid image: Image size invalid (${iw}x${ih})`)
-							// 指定了尺寸，那么要根据这个尺寸进行实际尺寸的约束
-							if (width || height) {
-								// 仅指定宽度
-								if (!height) {
-									// 比例计算
-									height = (width as number) * (ih / iw)
+				fetch(url).then(res => {
+					if (!res.ok) reject(new Error("Image load failed!"))
+					else {
+						res.blob().then(blob => {
+							const fr = new FileReader()
+							fr.onload = () => {
+								let {width, height} = {...defaultOptions, ...options}
+								const img = new Image()
+								img.src = fr.result as string
+								img.onload = () => {
+									const iw = img.width, ih = img.height
+									if (!iw || !ih) throw new Error(`Invalid image: Image size invalid (${iw}x${ih})`)
+									// 指定了尺寸，那么要根据这个尺寸进行实际尺寸的约束
+									if (width || height) {
+										// 仅指定宽度
+										if (!height) {
+											// 比例计算
+											height = (width as number) * (ih / iw)
+										}
+										// 仅指定高度
+										else if (!width) {
+											width = (height as number) * (iw / ih)
+										}
+										// 宽高同时指定
+										else {
+											// 不用处理
+										}
+									}
+									// 由图像自行驱动
+									else {
+										width = iw
+										height = ih
+									}
+									styles.push(...[
+										`background-image: url(${fr.result})`,
+										`padding: ${height as number / 2}px ${width as number / 2}px`,
+									])
+									// console.log(styles)
+									console.log("%c ", styles.join(";"));
+									callback && callback()
+									resolve()
 								}
-								// 仅指定高度
-								else if (!width) {
-									width = (height as number) * (iw / ih)
-								}
-								// 宽高同时指定
-								else {
-									// 不用处理
+								img.onerror = e => {
+									console.error(e)
+									reject(e)
 								}
 							}
-							// 由图像自行驱动
-							else {
-								width = iw
-								height = ih
-							}
-							styles.push(...[
-								`background-image: url(${fr.result})`,
-								`padding: ${height as number / 2}px ${width as number / 2}px`,
-							])
-							// console.log(styles)
-							console.log("%c ", styles.join(";"));
-							callback && callback()
-							resolve()
-						}
-						img.onerror = e => {
-							console.error(e)
-							reject(e)
-						}
+							fr.readAsDataURL(blob)
+						}).catch(reject)
 					}
-					fr.readAsDataURL(x.response)
-				}
+				}).catch(reject)
 			})
 		})
 	}
