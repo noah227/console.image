@@ -112,6 +112,7 @@ export default {
 									reject(e)
 								}
 							}
+							fr.onerror = () => reject(fr.error)
 							fr.readAsDataURL(blob)
 						}).catch(reject)
 					}
